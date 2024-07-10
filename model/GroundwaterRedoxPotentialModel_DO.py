@@ -40,10 +40,7 @@ data.insert(0, 'Sample ID', range(1, len(data) + 1))
 # Preprocessing and Calculations
 # Example calculations (Replace these with your actual calculations)
 data['TpH'] = (data['Temperature']['C'] + T_k) * data['pH']['pH']
-
-## Why is IAP not accounting for H2O stoichiometry?
 data['IAP'] = np.log(data['O2(aq)']['activity']) - np.log(data['Activity of H2O']['activity'])
-# data['IAP'] = np.log((data['O2(aq)']['activity'])/(data['Activity of H2O']['activity']))
 data['log_K (in situ)'] = 93.7 - 0.3318 * data['Temperature']['C'] + 0.001056 * (data['Temperature']['C']**2) - 0.00000234 * (data['Temperature']['C']**3) + 0.000000002363 * (data['Temperature']['C']**4)
 data['E0 (in situ)'] = (R * (data['Temperature']['C'] + T_k) / (n_e * F)) * np.log(10) * data['log_K (in situ)']
 data['E_pH'] = -(n_h / n_e) * ((R * (data['Temperature']['C'] + T_k) / F) * np.log(10) * data['pH']['pH'])
@@ -53,9 +50,6 @@ data['E_a_rxn'] = data['E0 (in situ)'] + data['E_pH'] + data['E_a']
 data['E_c_rxn'] = data['E0 (in situ)'] + data['E_pH'] + data['E_c']
 data['E-EoTdivT'] = (data['E_a_rxn']-data['E0 (in situ)'])/(data['Temperature']['C'] + T_k)
 data['Error_GWB_a'] = data['E_a_rxn'] - data['Eh (O2(aq) /H2O )']['V']
-
-## TpH
-data['E-EoTdivT'] = (data['E_a_rxn']-data['E0 (in situ)'])/(data['Temperature']['C'] + T_k)
 data['Error_act_cont'] = data['E_c_rxn'] - data['E_a_rxn']
 
 
