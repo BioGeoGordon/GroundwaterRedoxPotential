@@ -7,24 +7,23 @@ Created on Thu Apr  4 10:52:18 2024
 
 import pandas as pd
 import numpy as np
-from scipy.stats import pearsonr
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 from math import sqrt
 import os
 
 redox_couple = 'All_O2_H2O'
 
 # Specify your output directory here
-output_directory = f'C:/Users/Gordo/OneDrive - University Of Oregon/Documents/GraduateSchool/Research/GroundWaterML/2024/Redox calculations/GEMStat_Charge/LinReg_AlphaBeta_fix/{redox_couple}/'
+output_directory = f'/user/directory/out/path/{redox_couple}/'
 
 # Ensure the output directory exists
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
 
 # Load the data
-file_path = 'C:/Users/Gordo/OneDrive - University Of Oregon/Documents/GraduateSchool/Research/GroundWaterML/2024/Redox calculations/Compiled_Charge/GSS_All_Charge_less10pct_O2_noEC_fix.csv'
+file_path = 'user/directory/input/path/GSS_All_Charge_less10pct_O2.csv'
 data = pd.read_csv(file_path, header=[0, 1])
 
 # Constants
